@@ -1,0 +1,36 @@
+Aufgabe 2. (Insertionsort)
+Algorithm 1: Insertionsort
+Input: A[1, . . . , n]
+Result: inplace-sorted A
+1 for j = 2 to n do
+2 val := A[j]
+3 i := j − 1
+4 while i > 0 and A[i] > val do
+5 A[i + 1] := A[i]
+6 i := i − 1
+7 A[i + 1] := val
+
+Sei n ≥ 4 eine durch vier teilbare Zahl. Bestimmen Sie die Anzahl von Vergleichen,
+die Insertionsort für folgende Eingaben ausführt. Dabei zählt i > 0 and A[i] > val zusammen als ein Vergleich.
+
+
+a) [2, 3, . . . , n − 1, n, 2, 1]
+
+    Bis n duechlaufen: n-2 Vergleiche.
+    2 wird mit allen zahlen zwischen 2 und n verglichen.-> n-1 Vergleiche.
+    1 wird mit allen zahlen zwischen 2 (2 mal) und n verglichen.-> n Vergleiche.
+    Gesamte Vergleiche: n-2 + n-1 + n = 3n-3
+
+b) [2, 1, 4, 3, . . . , n, n − 1] (insgesamt n Elemente).
+
+    Jedes 2i- te Element wird einmal getauscht, also zwei mal verglichen->2n/2 = n
+    Jedes 2i+1-te Element wird nicht getauscht, also ein mal verglichen->n/2
+
+    Gesamte Vergleiche: n + n/2 = 3n/2
+
+c) [1, n/2 + 1, 1, n/2 + 2, . . . , 1, n] (insgesamt n Elemente).
+
+    Jede 1 wird über alle links liegenden n/2+k Terme getauscht (Anzahl 1 bis n/2->summe=(n/2(n/2+1))/2)->(n/2(n/2+1))/2 Vergleiche
+    Jedes Element (ab 2) wird einmal verglichen ohne getauscht zu werden: n-1 Vergleiche
+
+    Gesamte Vergleiche: (n/2(n/2+1))/2 + n-1
