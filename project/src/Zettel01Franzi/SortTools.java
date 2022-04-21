@@ -67,92 +67,32 @@ public class SortTools {
     }
 
     public static void main(String[] args) {
-        int[] test100 = createSequenceDec(100);
-        int[] test1000 = createSequenceDec(1000);
-        int[] test10000 = createSequenceDec(10000);
-        int[] test100000 = createSequenceDec(100000);
-        int[] test200000 = createSequenceDec(200000);
 
-        for (int i = 1; i <= 10; i++) {
-            final long timeStart = System.nanoTime();
-            insertionSort(test100);
-            final long timeEnd = System.nanoTime();
-            System.out.println("Sortierzeit für 100 Durchlauf " + i + " : " + (timeEnd - timeStart));
+        int[][] testObjects = {createSequenceDec(100), createSequenceDec(1000),
+                createSequenceDec(10000), createSequenceDec(100000), createSequenceDec(200000)};
 
-            final long timeS = System.nanoTime();
-            insertionSort(test1000);
-            final long timeE = System.nanoTime();
-            System.out.println("Sortierzeit für 1000 Durchlauf " + i + " : " + (timeE - timeS));
+        String result = " ";
 
-            final long timeSt = System.nanoTime();
-            insertionSort(test10000);
-            final long timeEn = System.nanoTime();
-            System.out.println("Sortierzeit für 10000 Durchlauf " + i + " : " + (timeEn - timeSt));
-
-            final long timeStar = System.nanoTime();
-            insertionSort(test100000);
-            final long timeEnde = System.nanoTime();
-            System.out.println("Sortierzeit für 100000 Durchlauf " + i + " : " + (timeEnde - timeStar));
-
-            final long timeStarte = System.nanoTime();
-            insertionSort(test200000);
-            final long timeEnden = System.nanoTime();
-            System.out.println("Sortierzeit für 200000 Durchlauf " + i + " : " + (timeEnden - timeStarte));
-
+        for (int i = 0; i < testObjects.length ; i++) {
+            result = result + "\n Die Testlaufzeiten für Objekt " + i + " : ";
+            for (int j = 0; j < 10; j++) {
+                long timeStart = System.nanoTime();
+                insertionSort(testObjects[i]);
+                long timeEnd = System.nanoTime();
+                long time = timeEnd - timeStart;
+                result = result  + time +  ", ";
+            }
+        }
+        System.out.println(result);
 
         }
 
-    }
+
 }
 
-//Sortierzeit für 100 Durchlauf 1 : 11200
-//Sortierzeit für 1000 Durchlauf 1 : 35000
-//Sortierzeit für 10000 Durchlauf 1 : 365800
-//Sortierzeit für 100000 Durchlauf 1 : 2622100
-//Sortierzeit für 200000 Durchlauf 1 : 2283900
-//Sortierzeit für 100 Durchlauf 2 : 1200
-//Sortierzeit für 1000 Durchlauf 2 : 9300
-//Sortierzeit für 10000 Durchlauf 2 : 90900
-//Sortierzeit für 100000 Durchlauf 2 : 875200
-//Sortierzeit für 200000 Durchlauf 2 : 1813300
-//Sortierzeit für 100 Durchlauf 3 : 1400
-//Sortierzeit für 1000 Durchlauf 3 : 9100
-//Sortierzeit für 10000 Durchlauf 3 : 87100
-//Sortierzeit für 100000 Durchlauf 3 : 928200
-//Sortierzeit für 200000 Durchlauf 3 : 1759100
-//Sortierzeit für 100 Durchlauf 4 : 400
-//Sortierzeit für 1000 Durchlauf 4 : 900
-//Sortierzeit für 10000 Durchlauf 4 : 6400
-//Sortierzeit für 100000 Durchlauf 4 : 63600
-//Sortierzeit für 200000 Durchlauf 4 : 110500
-//Sortierzeit für 100 Durchlauf 5 : 400
-//Sortierzeit für 1000 Durchlauf 5 : 700
-//Sortierzeit für 10000 Durchlauf 5 : 5800
-//Sortierzeit für 100000 Durchlauf 5 : 49700
-//Sortierzeit für 200000 Durchlauf 5 : 109300
-//Sortierzeit für 100 Durchlauf 6 : 200
-//Sortierzeit für 1000 Durchlauf 6 : 900
-//Sortierzeit für 10000 Durchlauf 6 : 5100
-//Sortierzeit für 100000 Durchlauf 6 : 44500
-//Sortierzeit für 200000 Durchlauf 6 : 115000
-//Sortierzeit für 100 Durchlauf 7 : 600
-//Sortierzeit für 1000 Durchlauf 7 : 500
-//Sortierzeit für 10000 Durchlauf 7 : 6600
-//Sortierzeit für 100000 Durchlauf 7 : 50700
-//Sortierzeit für 200000 Durchlauf 7 : 106600
-//Sortierzeit für 100 Durchlauf 8 : 900
-//Sortierzeit für 1000 Durchlauf 8 : 800
-//Sortierzeit für 10000 Durchlauf 8 : 6600
-//Sortierzeit für 100000 Durchlauf 8 : 59400
-//Sortierzeit für 200000 Durchlauf 8 : 105600
-//Sortierzeit für 100 Durchlauf 9 : 400
-//Sortierzeit für 1000 Durchlauf 9 : 700
-//Sortierzeit für 10000 Durchlauf 9 : 6800
-//Sortierzeit für 100000 Durchlauf 9 : 71000
-//Sortierzeit für 200000 Durchlauf 9 : 138900
-//Sortierzeit für 100 Durchlauf 10 : 400
-//Sortierzeit für 1000 Durchlauf 10 : 1200
-//Sortierzeit für 10000 Durchlauf 10 : 6800
-//Sortierzeit für 100000 Durchlauf 10 : 59500
-//Sortierzeit für 200000 Durchlauf 10 : 128500
+// Die Testlaufzeiten für Objekt 0 : 10800, 4900, 4200, 4000, 4000, 4000, 4100, 4000, 4000, 3900,
+// Die Testlaufzeiten für Objekt 1 : 42100, 40100, 40300, 40400, 40300, 40400, 40600, 40300, 40500, 40300,
+// Die Testlaufzeiten für Objekt 2 : 394700, 404300, 387400, 394900, 415200, 279100, 91100, 98100, 83000, 83300,
+// Die Testlaufzeiten für Objekt 3 : 844900, 857500, 824600, 817500, 834000, 559100, 183400, 154100, 156900, 163300,
+// Die Testlaufzeiten für Objekt 4 : 222500, 212800, 205600, 195500, 215900, 197100, 199700, 197500, 195200, 204500,
 
