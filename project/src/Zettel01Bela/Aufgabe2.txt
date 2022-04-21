@@ -24,9 +24,9 @@ a) [2, 3, . . . , n − 1, n, 2, 1]
 b) [2, 1, 4, 3, . . . , n, n − 1] (insgesamt n Elemente).
 
     Jedes 2i- te Element wird einmal getauscht, also zwei mal verglichen->2n/2 = n
-    Jedes 2i+1-te Element wird nicht getauscht, also ein mal verglichen->n/2
+    Jedes 2i+1-te Element wird nicht getauscht, also ein mal verglichen->n/2-1
 
-    Gesamte Vergleiche: n + n/2 = 3n/2
+    Gesamte Vergleiche: n + n/2 = 3n/2-1
 
 c) [1, n/2 + 1, 1, n/2 + 2, . . . , 1, n] (insgesamt n Elemente).
 
