@@ -30,7 +30,7 @@ b) [2, 1, 4, 3, . . . , n, n − 1] (insgesamt n Elemente).
 
 c) [1, n/2 + 1, 1, n/2 + 2, . . . , 1, n] (insgesamt n Elemente).
 
-    Jede 1 wird über alle links liegenden n/2+k Terme getauscht (Anzahl 1 bis n/2->summe=(n/2(n/2+1))/2)->(n/2(n/2+1))/2 Vergleiche
+    Jede 1 wird über alle links liegenden n/2+k Terme getauscht (Anzahl 1 bis n/2-1)->summe=(n/2(n/2-1))/2)->(n/2(n/2-1))/2 Vergleiche
     Jedes Element (ab 2) wird einmal verglichen ohne getauscht zu werden: n-1 Vergleiche
 
-    Gesamte Vergleiche: (n/2(n/2+1))/2 + n-1
+    Gesamte Vergleiche: (n/2(n/2-1))/2 + n-1
