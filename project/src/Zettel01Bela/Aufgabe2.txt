@@ -17,9 +17,9 @@ die Insertionsort für folgende Eingaben ausführt. Dabei zählt i > 0 and A[i] 
 a) [2, 3, . . . , n − 1, n, 2, 1]
 
     Bis n duechlaufen: n-2 Vergleiche.
-    2 wird mit allen zahlen zwischen 2 und n verglichen.-> n-1 Vergleiche.
-    1 wird mit allen zahlen zwischen 2 (2 mal) und n verglichen.-> n Vergleiche.
-    Gesamte Vergleiche: n-2 + n-1 + n = 3n-3
+    2 wird mit allen zahlen zwischen 2 und n verglichen.-> n Vergleiche.
+    1 wird mit allen zahlen zwischen 2 (2 mal) und n verglichen.-> n+1 Vergleiche.
+    Gesamte Vergleiche: n-2 + n-1 + n = 3n-1
 
 b) [2, 1, 4, 3, . . . , n, n − 1] (insgesamt n Elemente).
 
