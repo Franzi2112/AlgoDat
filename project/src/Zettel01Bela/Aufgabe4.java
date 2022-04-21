@@ -27,6 +27,7 @@ public class Aufgabe4 {
 
 //b)
     //are there three numbers in the array that sum to the given value?
+    //this solution is O(n^2*log(n))
     public static boolean threeSum(int[] array, int sum) {
         for (int i = 0; i < array.length; i++) {
             if (twoSum(Arrays.copyOfRange(array,i+1,array.length), sum - array[i])) {
