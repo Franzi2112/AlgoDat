@@ -1,0 +1,21 @@
+a) Geben Sie Pseudocode für einen Algorithmus an, der für ein gegebenes Array A[1, n]
+mit Werten aus N die Summe aller Einträge von A berechnet, deren Wert ein Vielfaches
+von 3 ist, oder 0 ausgibt, falls A keine Vielfachen von 3 enthält. Was ist die Laufzeit
+Ihres Algorithmus?
+
+Input: ein Array A[1, n] mit Werten aus N
+Result  ein int Wert, der die Summe aller Einträge von A berechnet, deren Wert ein Vielfaches von 3 ist, oder 0 ausgibt, falls A keine Vielfachen von 3 enthält.
+
+sum :=0
+for i:=1 to n do
+  if A[i] mod 3 = 0 then
+    sum := sum + A[i]
+return sum
+
+Laufzeit ist O(n)
+
+
+
+
+b) Zeigen Sie die Korrektheit Ihres Algorithmus. Verwenden Sie dazu eine passende Schlei-
+feninvariante.
