@@ -15,7 +15,14 @@ return sum                  | O(1)
 Laufzeit ist O(n)
 
 
-
-
 b) Zeigen Sie die Korrektheit Ihres Algorithmus. Verwenden Sie dazu eine passende Schlei-
 feninvariante.
+
+Initialisierung: sum =0= die summe aller Vielfachen von 3 im Teilarray A[1, 0].
+
+Invariante: die sum Variable speichert die Summe aller Vielfachen von 3 im teilarray A[1, i-1]
+für das i-te Element wird geprüft ob es ein Vielfaches von 3 ist, wenn das der Fall ist, wird die sum Variable aktualisiert und i wird um 1 erhöht.
+die Invariante bleibt damit bestehen.
+
+Terminierung: am ende der schleife ist i= n+1, damit sind laut invariante alle vielfachen von 3 des Array A[1,n] in sum aufsummiert.
+Falls keine vielfachen von 3 im array lagen, ist sum = 0.Das ist ebenfalls richtig.

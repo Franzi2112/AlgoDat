@@ -6,7 +6,7 @@ public class SortTools {
     public static int[] createSequenceInc(int n) {
         int[] seq = new int[n];
         for (int i = 1; i < n+1; i++) {
-            seq[i] = i;
+            seq[i] = i+1;
         }
         return seq;
     }
@@ -14,7 +14,7 @@ public class SortTools {
     public static int[] createSequenceDec(int n) {
         int[] seq = new int[n];
         for (int i = 1; i < n+1; i++) {
-            seq[i] = n - i - 1;
+            seq[i] = n - i + 1;
         }
         return seq;
     }
@@ -22,7 +22,7 @@ public class SortTools {
     public static int[] createSequenceRand(int n){
         int[] seq = new int[n];
         for (int i = 1; i < n+1; i++) {
-            seq[i] = (int) (Math.random() * n);
+            seq[i] = (int) (Math.random() * n)+1;
         }
         return seq;
     }
@@ -30,7 +30,7 @@ public class SortTools {
     public static int[] createSequenceAlt(int n){
         int[] seq = new int[n];
         for (int i = 1; i < n+1; i++) {
-            seq[i] = (i+1) % 2;
+            seq[i] = ((i+1) % 2)+1;
         }
         return seq;
     }
