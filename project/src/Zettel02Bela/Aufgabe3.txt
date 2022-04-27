@@ -14,6 +14,17 @@ a) 1. Was berechnet DoSomething(A)?
 
 
 2. Geben Sie die Laufzeit in Abhängigkeit von n an.
+
+Input: Ein Array A[1, n] mit Einträgen aus N, wobei n ≥ 2
+Result: ?
+1 x := −1                   |O(1)
+2 for i = 1 to n do         |O(n)
+3 for j = 1 to n do         |O(n)
+4 if i 6= j then            |O(1)
+5 if A[i] · A[j] > x then   |O(1)
+6 x := A[i] · A[j]          |O(1)
+
+
     Laufzeit ist O(n^2).
 
 b) Geben Sie Pseudocode für einen Algorithmus an, der für ein gegebenes Array A[1, n]

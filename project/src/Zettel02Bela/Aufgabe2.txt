@@ -6,11 +6,11 @@ Ihres Algorithmus?
 Input: ein Array A[1, n] mit Werten aus N
 Result  ein int Wert, der die Summe aller Einträge von A berechnet, deren Wert ein Vielfaches von 3 ist, oder 0 ausgibt, falls A keine Vielfachen von 3 enthält.
 
-sum :=0
-for i:=1 to n do
-  if A[i] mod 3 = 0 then
-    sum := sum + A[i]
-return sum
+sum :=0                     | O(1)
+for i:=1 to n do            | O(n)
+  if A[i] mod 3 = 0 then    | O(1)
+    sum := sum + A[i]       | O(1)
+return sum                  | O(1)
 
 Laufzeit ist O(n)
 

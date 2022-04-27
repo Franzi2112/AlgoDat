@@ -4,7 +4,7 @@ public class SortTools {
     public static int[] createSequenceInc(int n) {
         int[] seq = new int[n];
         for (int i = 0; i < n; i++) {
-            seq[i] = i;
+            seq[i] = i+1;
         }
         return seq;
     }
@@ -12,7 +12,7 @@ public class SortTools {
     public static int[] createSequenceDec(int n) {
         int[] seq = new int[n];
         for (int i = 0; i < n; i++) {
-            seq[i] = n - i - 1;
+            seq[i] = n - i + 1;
         }
         return seq;
     }
