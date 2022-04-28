@@ -3,36 +3,41 @@ package Zettel02Bela;
 import java.util.Random;
 
 public class SortTools {
-    public static int[] createSequenceInc(int n) {
-        int[] seq = new int[n];
+    public static int[] createSequenceInt(int n) {
+        int[] ascending = new int[n];
         for (int i = 0; i < n; i++) {
-            seq[i] = i+1;
+            ascending[i] = i + 1;
         }
-        return seq;
+        return ascending;
     }
 
     public static int[] createSequenceDec(int n) {
-        int[] seq = new int[n];
-        for (int i = 0; i < n; i++) {
-            seq[i] = n - i + 1;
+        int[] descending = new int[n];
+        for (int i = 1; i < n+ 1; i++) {
+            descending[i - 1] = n + 1 - i ;
         }
-        return seq;
+        return descending;
     }
 
-    public static int[] createSequenceRand(int n){
-        int[] seq = new int[n];
+    public static int[] createSequenceRand(int n) {
+        int[] randomSeq = new int[n];
         for (int i = 0; i < n; i++) {
-            seq[i] = new Random ().nextInt(n);
+            Random rd = new Random();
+            randomSeq[i] = rd.nextInt(n) + 1;
         }
-        return seq;
+        return randomSeq;
     }
 
-    public static int[] createSequenceAlt(int n){
-        int[] seq = new int[n];
-        for (int i = 1; i < n+1; i++) {
-            seq[i] = ((i+1) % 2)+1;
+    public static int[] createSequenceAlt(int n) {
+        int[] altSeq = new int[n];
+        for (int i = 0; i < n; i++) {
+            if ((i + 1) % 2 != 0) {
+                altSeq[i] = 1;
+            } else {
+                altSeq[i] = 2;
+            }
         }
-        return seq;
+        return altSeq;
     }
 
     public static void insertionSort(int[] a) {
