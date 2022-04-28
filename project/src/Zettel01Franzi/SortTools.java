@@ -1,5 +1,6 @@
 package Zettel01Franzi;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class SortTools {
@@ -14,8 +15,8 @@ public class SortTools {
 
     public static int[] createSequenceDec(int n) {
         int[] descending = new int[n];
-        for (int i = n - 1; i > 0; i--) {
-            descending[i] = i + 1;
+        for (int i = 1; i < n+ 1; i++) {
+            descending[i - 1] = n + 1 - i ;
         }
         return descending;
     }
@@ -66,24 +67,89 @@ public class SortTools {
         }
     }
 
-    public static void main(String[] args) {
-
-        int[][] testObjects = {createSequenceDec(100), createSequenceDec(1000),
-                createSequenceDec(10000), createSequenceDec(100000), createSequenceDec(200000)};
-
-        String result = " ";
-
-        for (int i = 0; i < testObjects.length ; i++) {
-            result = result + "\n Die Testlaufzeiten für Objekt " + i + " : ";
-            for (int j = 0; j < 10; j++) {
-                long timeStart = System.nanoTime();
-                insertionSort(testObjects[i]);
-                long timeEnd = System.nanoTime();
-                long time = timeEnd - timeStart;
-                result = result  + time +  ", ";
+    public static void bubbleSort(int[] arr) {
+        for (int i = arr.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int n = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = n;
+                }
             }
         }
-        System.out.println(result);
+    }
+
+    public static void bubbleSortNew(int[] arr) {
+        for(int i = arr.length- 1 ; i > 0; i++) {
+            for (int j = 0; j < i - 10; j++) {
+                for (int k = 1; k < j; k++) {
+                    int s = arr[k]; //Speicher den Wert des Elementes was einsortiert werden muss
+                    int l = k; //Speicher den Indize des einzusortierenden Elementes
+                    while (l > 0 && arr[l - 1] > s) { //überprüfe solange die vorhergehenden elemente bis das zu vergleichende nicht mehr größer ist als das vorherige
+                        arr[l] = arr[l - 1]; //dabei verschiebe ich die Elemente die größer sind immer um einen Platz nach vorne
+                        l = l - 1; //verkleinere den Indize des zu vergleichenden Elementes
+                    }
+                    arr[l] = s;
+                }
+            }
+        }
+    }
+
+    public static <T extends Comparable<T>> void bubbleSortGen(T[] arr) {
+        for (int i = arr.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
+                    T n = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = n;
+                }
+            }
+        }
+    }
+
+
+
+    public static void main(String[] args) {
+
+        int testSize = 10;
+        long[] times=new long[3];
+        int[][] testData = { createSequenceDec(100), createSequenceDec(1000),createSequenceDec(10000), createSequenceDec(100000)};
+
+
+        //insertionSort timing
+        System.out.println("InsertionSort");
+        for (int i = 0; i < testSize; i++) {
+            for (int j = 0; j < testData.length; j++) {
+                int[] testtemp = testData[j].clone();
+                long start = System.nanoTime();
+                insertionSort(testtemp);
+                times[0]=times[0]+(System.nanoTime()-start);
+            }
+        }
+        //bubbleSort timing
+        System.out.println("BubbleSort");
+        for (int i = 0; i < testSize; i++) {
+            for (int j = 0; j < testData.length; j++) {
+                int[] testtemp = testData[j].clone();
+                long start = System.nanoTime();
+                bubbleSort(testtemp);
+                times[1]=times[1]+(System.nanoTime()-start);
+            }
+        }
+        //bubbleSortNew timing
+        System.out.println("BubbleSortNew");
+        for (int i = 0; i < testSize; i++) {
+            for (int j = 0; j < testData.length; j++) {
+                int[] testtemp = testData[j].clone();
+                long start = System.nanoTime();
+                bubbleSortNew(testtemp);
+                times[2]=times[2]+(System.nanoTime()-start);
+            }
+        }
+        //calc mean
+        for (int i = 0;i<times.length;i++) {
+            times[i]=  times[i]/(testSize*testData.length);
+        }
 
         }
 
