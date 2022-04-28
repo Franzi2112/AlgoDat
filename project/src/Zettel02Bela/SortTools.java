@@ -73,7 +73,7 @@ public class SortTools {
 
     public static void bubbleSortNew(int[]a) {
         for (int i=a.length-1;i>0;i--) {
-            for (int j=0;j<i;j++) {
+            for (int j=0;j<i;j+=9) {
                 //sort[j->j+10]
                 for (int k=j+1;k<Math.min(j+10,a.length-1);k++) {
                     int l = k;
@@ -146,8 +146,8 @@ public class SortTools {
         //print results
         System.out.printf("insertionSort: %5f\nbubbleSort: %5f\nbubbleSortNew: %5f\n",times[0]/Math.pow(10,9),times[1]/Math.pow(10,9),times[2]/Math.pow(10,9));
         /*
-        insertionSort: 0,966800
-        bubbleSort: 1,035131
-        bubbleSortNew: 26,763770 */
+        insertionSort: 1,027081
+        bubbleSort: 0,923869
+        bubbleSortNew: 3,729730 */
     }
 }
