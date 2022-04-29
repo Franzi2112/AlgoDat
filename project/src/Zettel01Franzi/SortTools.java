@@ -80,9 +80,9 @@ public class SortTools {
     }
 
     public static void bubbleSortNew(int[] arr) {
-        for(int i = arr.length- 1 ; i > 0; i++) {
-            for (int j = 0; j < i - 10; j++) {
-                for (int k = j+1 ; k < j + 10; k++) {
+        for(int i = arr.length- 1 ; i > 9; i--) {
+            for (int j = 0; j < i-10; j++) {
+                for (int k = j ; k < j + 10; k++) {
                     int s = arr[k]; //Speicher den Wert des Elementes was einsortiert werden muss
                     int l = k; //Speicher den Indize des einzusortierenden Elementes
                     while (l > 0 && arr[l - 1] > s) { //überprüfe solange die vorhergehenden elemente bis das zu vergleichende nicht mehr größer ist als das vorherige
@@ -111,11 +111,8 @@ public class SortTools {
 
     public static void main(String[] args) {
 
-        String dec = Arrays.toString(createSequenceRand(10));
 
-        System.out.println(dec);
-
-        /*int testSize = 10;
+        int testSize = 10;
         long[] times=new long[3];
         int[][] testData = { createSequenceDec(100), createSequenceDec(1000),createSequenceDec(10000), createSequenceDec(100000)};
 
@@ -156,7 +153,7 @@ public class SortTools {
         }
         System.out.printf("insertionSort: %5f\nbubbleSort: %5f\nbubbleSortNew: %5f\n",times[0]/Math.pow(10,9),times[1]/Math.pow(10,9),times[2]/Math.pow(10,9));
 
-*/
+
     }
 
 
