@@ -1,0 +1,31 @@
+a)  Beschreiben Sie, wie für ein gegebenes Array A[1, n] von Aktienkursen der maximale
+    Gewinn in O(n2) Zeit bestimmt werden kann.
+
+
+    Man paar jedes Element n_1 mit allen nachfolgenden Elementen n_2 und berechnet den Gewinn n_2-n_1. In einer Variable speichert man das Maximum und updated das für jedes Paar (n_1,n_2).
+    Am Ende stet die maximale Gewinnspanne in der Variable.
+
+b)  Der maximale Gewinn soll nun mit Hilfe des folgenden rekursiven Algorithmus berechnet
+    werden.
+    Algorithm 1: Trade(A,p,r)
+    Input: A[1, n], p, r
+    Output: maximum win for A[p, r]
+    1 if p = r then
+    2 return 0
+    3 else
+    4 q := ⌊p+2r⌋
+    5 t1 :=Trade(A, p, q)
+    6 t2 :=Trade(A, q + 1, r)
+    7 return MaxWin(A, p, r, t1, t2)
+
+    Geben Sie Pseudocode für die Methode MaxWin(A, p, r, t1, t2) an, sodass mit dem
+    Aufruf Trade(A, 1, n) der maximale Gewinn für ein gegebenes Aktienkursarray A[1, n]
+    in O(n log(n)) Zeit gefunden wird.
+
+
+
+    Algorithm 2: MaxWin(A,p,r,t1,t2)
+        Input: A[1, n], p, r, t1, t2
+        Output: maximum win for A[p, r]
+        1
+
