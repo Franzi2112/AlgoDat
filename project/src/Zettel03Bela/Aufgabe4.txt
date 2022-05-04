@@ -1,0 +1,43 @@
+Der maximale Gewinn soll nun mit Hilfe des folgenden rekursiven Algorithmus berechnet
+werden.
+Algorithm 1: Trade(A,p,r)
+Input: A[1, n], p, r
+Output: maximum win for A[p, r]
+1 if p = r then
+2 return 0
+3 else
+4 q := ⌊p+2r⌋
+5 t1 :=Trade(A, p, q)
+6 t2 :=Trade(A, q + 1, r)
+7 return MaxWin(A, p, r, t1, t2)
+
+Geben Sie Pseudocode für die Methode MaxWin(A, p, r, t1, t2) an, sodass mit dem
+Aufruf Trade(A, 1, n) der maximale Gewinn für ein gegebenes Aktienkursarray A[1, n]
+in O(n log(n)) Zeit gefunden wird.
+
+
+Algorithm 2: MaxWin(A, p, r, t1, t2)
+Input: A[1, n], p, r, t1, t2
+Output: maximum win for A[p, r]
+
+min := A[p]
+maxdiff := 0
+pointer := p
+while pointer <= r do
+    if A[pointer] - min > maxdiff then
+        maxdiff := A[pointer] - min
+    if A[pointer] < min then
+        min := A[pointer]
+    pointer := pointer + 1
+
+return maxdiff
+
+
+
+Laufzeitanalyse:
+MaxWin: O(n)
+
+T(n)=2T(n/2)+O(n)+O(1)
+
+MasterTheorem:
+n^(log_2(2))=n ist in Theta(n)->T(n)=n log(n)
