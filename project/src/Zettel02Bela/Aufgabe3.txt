@@ -34,6 +34,7 @@ mit n ≥ 2 in O(n) Zeit die gleiche Ausgabe wie DoSomething(A) liefert.
     i2 := 0
     for i = 1 to n do
         if A[i] > i1 then
+            i2:= i1
             i1 := A[i]
         else if A[i] > i2 then
             i2 := A[i]
