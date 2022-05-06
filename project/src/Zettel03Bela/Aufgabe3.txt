@@ -1,5 +1,5 @@
 a)  Beschreiben Sie, wie für ein gegebenes Array A[1, n] von Aktienkursen der maximale
-    Gewinn in O(n2) Zeit bestimmt werden kann.
+    Gewinn in O(n^2) Zeit bestimmt werden kann.
 
 
     Man paar jedes Element n_1 mit allen nachfolgenden Elementen n_2 und berechnet den Gewinn n_2-n_1. In einer Variable speichert man das Maximum und updated das für jedes Paar (n_1,n_2).
@@ -23,9 +23,28 @@ b)  Der maximale Gewinn soll nun mit Hilfe des folgenden rekursiven Algorithmus 
     in O(n log(n)) Zeit gefunden wird.
 
 
+    Algorithm 2: MaxWin(A, p, r, t1, t2)
+    Input: A[1, n], p, r, t1, t2
+    Output: maximum win for A[p, r]
 
-    Algorithm 2: MaxWin(A,p,r,t1,t2)
-        Input: A[1, n], p, r, t1, t2
-        Output: maximum win for A[p, r]
-        1
+    min := A[p]
+    maxdiff := 0
+    pointer := p
+    while pointer <= r do
+        if A[pointer] - min > maxdiff then
+            maxdiff := A[pointer] - min
+        if A[pointer] < min then
+            min := A[pointer]
+        pointer := pointer + 1
 
+    return maxdiff
+
+
+
+    Laufzeitanalyse:
+    MaxWin: O(n)
+
+    T(n)=2T(n/2)+O(n)+O(1)
+
+    MasterTheorem:
+    n^(log_2(2))=n ist in Theta(n)->T(n)=n log(n)
