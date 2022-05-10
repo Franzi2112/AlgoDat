@@ -205,6 +205,8 @@ public class SortTools {
         mergeSortGen(a, 0, a.length - 1);
     }
 
+
+    //cast array to Comparable first!!!!
     private static void mergeSortGen(Comparable[] a, int left, int right) {
         if (left < right) {
             int middle = (left + right) / 2;
@@ -243,9 +245,13 @@ public class SortTools {
 
     public static void main(String[] args) {
 
+        Comparable[] arr = {'t','a','z','b', 'a'};
+        mergeSortGen(arr);
 
 
-        int testSize = 10;
+
+        System.out.println(Arrays.toString(arr));
+       /* int testSize = 10;
         //1. insertionSort
         //2. mergeSort
         //3. mergeSortNew
