@@ -258,37 +258,39 @@ public class SortTools {
     }
 
     public static int binSearch(int[] A, int x, int l, int r) {
-
+        if(l > r){
+            return -1;
+        }
         int a = (l + r) / 2;
         if (x == A[a]) {
             return a;
         } else if (x < A[a]) {
-            binSearch(A, x, l, a - 1);
+            return binSearch(A, x, l, a - 1);
         } else {
-            binSearch(A, x, a + 1, r);
+            return binSearch(A, x, a + 1, r);
         }
-        return -1;
     }
 
     public static int binSearchNew(int[] A, int x, int l, int r) {
-
+        if(l > r){
+            return -1;
+        }
         int al = (r - l) / 3 + l;
-        int ar = al * 2;
+        int ar = al + (r - l) / 3;
         if (x == A[al]) {
             return al;
         } else if (x == A[ar]) {
             return ar;
         } else if (x < A[ar]) {
             if (x < A[al]) {
-                binSearchNew(A, x, l, al - 1);
+                return binSearchNew(A, x, l, al - 1);
             } else {
-                binSearchNew(A, x, al + 1, ar - 1);
+                return binSearchNew(A, x, al + 1, ar - 1);
             }
         } else {
-            binSearchNew(A, x, ar + 1, r);
+            return binSearchNew(A, x, ar + 1, r);
         }
 
-        return -1;
     }
 
 
