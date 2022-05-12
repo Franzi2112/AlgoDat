@@ -1,12 +1,9 @@
 package Zettel04Bela;
 
-import Zettel01Bela.SortTools;
-
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class SearchTools {
 
