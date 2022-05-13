@@ -1,12 +1,9 @@
 package Zettel04Bela;
 
-import Zettel01Bela.SortTools;
-
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class SearchTools {
 
@@ -69,6 +66,43 @@ public class SearchTools {
         }
         return -1;
     }
+
+    public static int binSearch(int[] A, int x, int l, int r) {
+        if(l > r){
+            return -1;
+        }
+        int a = (l + r) / 2;
+        if (x == A[a]) {
+            return a;
+        } else if (x < A[a]) {
+            return binSearch(A, x, l, a - 1);
+        } else {
+            return binSearch(A, x, a + 1, r);
+        }
+    }
+
+    public static int binSearchNew(int[] A, int x, int l, int r) {
+        if(l > r){
+            return -1;
+        }
+        int al = (r - l) / 3 + l;
+        int ar = al + (r - l) / 3;
+        if (x == A[al]) {
+            return al;
+        } else if (x == A[ar]) {
+            return ar;
+        } else if (x < A[ar]) {
+            if (x < A[al]) {
+                return binSearchNew(A, x, l, al - 1);
+            } else {
+                return binSearchNew(A, x, al + 1, ar - 1);
+            }
+        } else {
+            return binSearchNew(A, x, ar + 1, r);
+        }
+
+    }
+
 
     public static void main(String[] args) {
         int repeats= 500;
