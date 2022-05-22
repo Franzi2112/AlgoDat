@@ -82,7 +82,7 @@ public class SortTools {
     }
 
     private static int partitionRandom(int[] A, int l, int r) {
-        int randInt = new Random().nextInt(l,r);
+        int randInt = new Random().nextInt(l,r+1);
         int pivot = A[randInt];
         A[randInt] = A[l];
         A[l] = pivot;
@@ -111,9 +111,9 @@ public class SortTools {
 
     private static int partitionNewRandom(int[] A, int l, int r) {
         int[] randInts = new int[3];
-        randInts[0] = new Random().nextInt(l,r);
-        randInts[1] = new Random().nextInt(l,r);
-        randInts[2] = new Random().nextInt(l,r);
+        randInts[0] = new Random().nextInt(l,r+1);
+        randInts[1] = new Random().nextInt(l,r+1);
+        randInts[2] = new Random().nextInt(l,r+1);
         Arrays.sort(randInts);
         int pivot = A[randInts[1]];
         A[randInts[1]] = A[l];
@@ -135,13 +135,14 @@ public class SortTools {
 
     public static void quickSortTriRandom(int[] A, int l, int r) {
         if (l < r) {
-            if (r-l<=1) {
-            if (A[l]>A[r]) {
-                int temp = A[l];
-                A[l] = A[r];
+            if (r-l==1) {
+                if (A[l]>A[r]) {
+                    int temp = A[l];
+                    A[l] = A[r];
+                    A[r] = temp;
+                }
                 return;
             }
-        }
             int[] pivots = partitionTriRandom(A,l,r);
             quickSortTriRandom(A, l, pivots[0] - 1);
             quickSortTriRandom(A, pivots[0] + 1, pivots[1] - 1);
@@ -150,68 +151,75 @@ public class SortTools {
     }
 
     private static int[] partitionTriRandom(int[] A, int l, int r) {
-        //create 2 pivots
+        //create 2 random pivots
         int pivot2;
-        int pivot1 = pivot2 = new Random().nextInt(l, r);
+        int pivot1 = pivot2 = new Random().nextInt(l, r+1);
         while (pivot2 == pivot1) {
-            pivot2 = new Random().nextInt(l, r);
+            pivot2 = new Random().nextInt(l, r+1);
         }
         //sort pivots
-        if (A[pivot1] > A[pivot2]) {
+        if (A[pivot1] < A[pivot2]) {
             int temp = pivot1;
             pivot1 = pivot2;
             pivot2 = temp;
         }
+
+
         //swap pivots to the front
-        int temp1 = A[pivot1];
-        int temp2 = A[pivot2];
-        A[pivot1] = A[l];
-        A[pivot2] = A[l + 1];
-        A[l] = temp1;
-        A[l + 1] = temp2;
+        int temp1,temp2;
 
-        //partition
-        int i = l+2;
-        for (int j = l+2; j <= r; j++) {
-            if (A[j] <= A[l]) {
-                int temp = A[i];
-                A[i] = A[j];
-                A[j] = temp;
-                i++;
-            }
-        }
-        temp1 = A[l];
-        temp2 = A[l+1];
-        A[l] = A[i-2];
-        A[l+1] = A[i-1];
-        A[i-2] = temp1;
-        A[i-1] = temp2;
-        //mark second pivot
-        int mark = i-1;
+        if (pivot2==l){
+            temp1 = A[pivot1];
+            A[pivot1] = A[l];
+            A[l] = temp1;
 
-        for (int j = i+1; j <= r; j++) {
-            if (A[j] <= A[mark]) {
-                int temp = A[i];
-                A[i] = A[j];
-                A[j] = temp;
-                i++;
-            }
+            temp2 = A[pivot1];
+            A[pivot1] = A[l+1];
+            A[l+1] = temp2;
+        } else {
+
+            temp1 = A[pivot1];
+            temp2 = A[pivot2];
+            A[pivot1] = A[l];
+            A[pivot2] = A[l + 1];
+            A[l] = temp1;
+            A[l + 1] = temp2;
         }
-        temp1 = A[mark];
-        A[mark] = A[i-1];
-        A[i-1] = temp1;
-        return new int[]{mark-1, i-1};
+
+
+        //partition 1 (pivot2, the smaller one, at A[l+1])
+        int mark1 = partition(A, l+1, r);
+
+        //swap in pivot1
+        if (mark1-1==l) {
+            temp1 = A[l];
+            A[l] = A[mark1];
+            A[mark1] = temp1;
+        }
+        else {
+            temp1 = A[mark1];
+            temp2 = A[mark1-1];
+            A[mark1] = A[l];
+            A[l] = temp2;
+            A[mark1-1] = temp1;
+        }
+
+        //partition 2 (pivot1, the larger one, at A[mark1])
+        int mark2 = partition(A, mark1, r);
+
+        return new int[]{mark1-1, mark2};
     }
 
     public static void quickSortTriNewRandom(int[] A, int l, int r) {
         if (l < r) {
-            if (r-l<=1) {
-            if (A[l]>A[r]) {
-                int temp = A[l];
-                A[l] = A[r];
+            if (r-l==1) {
+                if (A[l]>A[r]) {
+                   int temp = A[l];
+                   A[l] = A[r];
+                   A[r] = temp;
+                }
                 return;
             }
-        }
             int[] pivots = partitionTriNewRandom(A,l,r);
             quickSortTriNewRandom(A, l, pivots[0] - 1);
             quickSortTriNewRandom(A, pivots[0] + 1, pivots[1] - 1);
@@ -226,67 +234,85 @@ public class SortTools {
         int pivot2=1;
         while(pivot1 == pivot2) {
             for (int i = 0; i < 5; i++) {
-                pivots[i] = new Random().nextInt(l, r);
+                pivots[i] = new Random().nextInt(l, r+1);
             }
             Arrays.sort(pivots);
             pivot1 = pivots[1];
             pivot2 = pivots[3];
         }
+
         //sort pivots
-        if (A[pivot1] > A[pivot2]) {
+        if (A[pivot1] < A[pivot2]) {
             int temp = pivot1;
             pivot1 = pivot2;
             pivot2 = temp;
         }
+
+
         //swap pivots to the front
-        int temp1 = A[pivot1];
-        int temp2 = A[pivot2];
-        A[pivot1] = A[l];
-        A[pivot2] = A[l + 1];
-        A[l] = temp1;
-        A[l + 1] = temp2;
+        int temp1,temp2;
 
-        //partition
-        int i = l+2;
-        for (int j = l+2; j <= r; j++) {
-            if (A[j] <= A[l]) {
-                int temp = A[i];
-                A[i] = A[j];
-                A[j] = temp;
-                i++;
-            }
-        }
-        temp1 = A[l];
-        temp2 = A[l+1];
-        A[l] = A[i-2];
-        A[l+1] = A[i-1];
-        A[i-2] = temp1;
-        A[i-1] = temp2;
-        //mark second pivot
-        int mark = i-1;
+        if (pivot2==l){
+            temp1 = A[pivot1];
+            A[pivot1] = A[l];
+            A[l] = temp1;
 
-        for (int j = i+1; j <= r; j++) {
-            if (A[j] <= A[l]) {
-                int temp = A[i];
-                A[i] = A[j];
-                A[j] = temp;
-                i++;
-            }
+            temp2 = A[pivot1];
+            A[pivot1] = A[l+1];
+            A[l+1] = temp2;
+        } else {
+
+            temp1 = A[pivot1];
+            temp2 = A[pivot2];
+            A[pivot1] = A[l];
+            A[pivot2] = A[l + 1];
+            A[l] = temp1;
+            A[l + 1] = temp2;
         }
-        temp1 = A[mark];
-        A[mark] = A[i-1];
-        A[i-1] = temp1;
-        return new int[]{mark-1, i-1};
+
+
+        //partition 1 (pivot2, the smaller one, at A[l+1])
+        int mark1 = partition(A, l+1, r);
+
+        //swap in pivot1
+        if (mark1-1==l) {
+            temp1 = A[l];
+            A[l] = A[mark1];
+            A[mark1] = temp1;
+        }
+        else {
+            temp1 = A[mark1];
+            temp2 = A[mark1-1];
+            A[mark1] = A[l];
+            A[l] = temp2;
+            A[mark1-1] = temp1;
+        }
+
+        //partition 2 (pivot1, the larger one, at A[mark1])
+        int mark2 = partition(A, mark1, r);
+
+        return new int[]{mark1-1, mark2};
     }
+
+
+    public static int[] arrSorted ={1, 2, 2, 3, 4, 5, 7, 7, 8, 8, 25, 47, 79, 423, 456, 6747};
+    public static int sum = Arrays.stream(arrSorted).sum();
 
     public static void main(String[] args) {
         int[] arr = {1,2,8,3,7,456,7,2,423,6747,8,5,25,4,79,47};
-        List<TriConsumer<int[],Integer,Integer>> sorts = List.of(SortTools::quickSortTriRandom, SortTools::quickSortTriNewRandom);
+        //sum of array
+        int[] arrSort = Arrays.copyOf(arr, arr.length);
+        Arrays.sort(arrSort);
+        System.out.println(Arrays.toString(arrSort)+"\n");
+        List<TriConsumer<int[],Integer,Integer>> sorts = List.of(/*SortTools::quickSort,SortTools::quickSortRandom,SortTools::quickSortNewRandom,*/SortTools::quickSortTriRandom, SortTools::quickSortTriNewRandom);
+        for (int i=0;i<100;i++){
         for (TriConsumer<int[],Integer,Integer> sort : sorts) {
             int[] arrCopy = Arrays.copyOf(arr, arr.length);
             sort.accept(arrCopy, 0, arrCopy.length-1);
-            System.out.println(Arrays.toString(arrCopy));
-        }
+            if (!Arrays.equals(arrCopy, arrSort)) {
+                System.out.println("Error: " + Arrays.toString(arrCopy));
+            }
+        }}
 
 
 
