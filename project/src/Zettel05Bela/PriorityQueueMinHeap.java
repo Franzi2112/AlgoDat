@@ -3,7 +3,7 @@ package Zettel05Bela;
 import java.util.ArrayList;
 
 public class PriorityQueueMinHeap<T extends Comparable<T>> implements PriorityQueue<T> {
-    private ArrayList<T> a;
+    private ArrayList<T> a = new ArrayList<>();
 
 
     public void decreaseKey(int i, T key){
@@ -50,7 +50,7 @@ public class PriorityQueueMinHeap<T extends Comparable<T>> implements PriorityQu
     @Override
     public void addElement(T elem) {
         a.add(elem);
-        decreaseKey(a.size(),elem);
+        decreaseKey(a.size()-1,elem);
     }
 
     @Override
@@ -62,5 +62,25 @@ public class PriorityQueueMinHeap<T extends Comparable<T>> implements PriorityQu
     public void deleteFirst() {
         a.set(0,a.get(a.size()-1));
         minHeapify(0);
+    }
+
+    public static void main(String[] args) {
+        PriorityQueueMinHeap<Integer> pq=new PriorityQueueMinHeap<>();
+        pq.addElement(5);
+        pq.addElement(3);
+        pq.addElement(1);
+        pq.addElement(4);
+        pq.addElement(2);
+        System.out.println(pq.getFirst());
+        pq.deleteFirst();
+        System.out.println(pq.getFirst());
+        pq.deleteFirst();
+        System.out.println(pq.getFirst());
+        pq.deleteFirst();
+        System.out.println(pq.getFirst());
+        pq.deleteFirst();
+        System.out.println(pq.getFirst());
+        pq.deleteFirst();
+        System.out.println(pq.getFirst());
     }
 }

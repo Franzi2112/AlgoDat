@@ -295,104 +295,147 @@ public class SortTools {
     }
 
 
-    public static int[] arrSorted ={1, 2, 2, 3, 4, 5, 7, 7, 8, 8, 25, 47, 79, 423, 456, 6747};
-    public static int sum = Arrays.stream(arrSorted).sum();
-
     public static void main(String[] args) {
-        int[] arr = {1,2,8,3,7,456,7,2,423,6747,8,5,25,4,79,47};
-        //sum of array
-        int[] arrSort = Arrays.copyOf(arr, arr.length);
-        Arrays.sort(arrSort);
-        System.out.println(Arrays.toString(arrSort)+"\n");
-        List<TriConsumer<int[],Integer,Integer>> sorts = List.of(/*SortTools::quickSort,SortTools::quickSortRandom,SortTools::quickSortNewRandom,*/SortTools::quickSortTriRandom, SortTools::quickSortTriNewRandom);
-        for (int i=0;i<100;i++){
-        for (TriConsumer<int[],Integer,Integer> sort : sorts) {
-            int[] arrCopy = Arrays.copyOf(arr, arr.length);
-            sort.accept(arrCopy, 0, arrCopy.length-1);
-            if (!Arrays.equals(arrCopy, arrSort)) {
-                System.out.println("Error: " + Arrays.toString(arrCopy));
-            }
-        }}
 
-
-
-        /*
         int repeats= 10;
-        List<Function<Integer,int[]>> sequenceCreators = List.of(SortTools::createSequenceInc, SortTools::createSequenceDec, SortTools::createSequenceRand);
         List<TriConsumer<int[],Integer,Integer>> sorts = List.of(SortTools::quickSort, SortTools::quickSortRandom, SortTools::quickSortNewRandom,SortTools::quickSortTriRandom, SortTools::quickSortTriNewRandom);
-        List<Integer> arrays= List.of(100,1000,10000,100000,200000);
-        long[][][][] times = new long[repeats][sequenceCreators.size()][sorts.size()][arrays.size()];
+        List<Integer> arraySizes= List.of(100,1000,10000,100000,200000);
+        List<Function<Integer,int[]>> sequenceCreators = List.of(SortTools::createSequenceInc, SortTools::createSequenceDec, SortTools::createSequenceRand);
+        long[][][][] times = new long[repeats][sorts.size()][arraySizes.size()][sequenceCreators.size()];
 
         //Messung
         for (int i = 0; i < repeats; i++) {
             System.out.println("repeat: "+i);
             for (int j = 0; j < sorts.size(); j++) {
-                for (int k = 0; k < arrays.size(); k++) {
-                    for (int l = 0; l < targetSupplier.size(); l++) {
-                        int[] temp = createSequenceInc(arrays.get(k));
+                for (int k = 0; k < arraySizes.size(); k++) {
+                    for (int l = 0; l < sequenceCreators.size(); l++) {
                         long currentTime = System.nanoTime();
-                        sorts.get(j).accept(temp, targetSupplier.get(l).apply(temp.length));
-                        times[i][j][k] = System.nanoTime() - currentTime;
+                        sorts.get(j).accept(sequenceCreators.get(l).apply(arraySizes.get(k)), 0, arraySizes.get(k) - 1);
+                        times[i][j][k][l] = System.nanoTime() - currentTime;
                     }
                 }
             }
         }
 
         //evaluation
-        String[] supplier= {"Random","-10"};
-        int indexSupplier=0;
-        String[] search= {"Linear","Binary","BinaryNew"};
-        int indexSearch=0;
+        String[] sortNames = {"quickSort", "quickSortRandom", "quickSortNewRandom", "quickSortTriRandom", "quickSortTriNewRandom"};
+        String[] arraySizeNames = {"100", "1000", "10000", "100000", "200000"};
+        String[] sequenceNames = {"increasing", "decreasing", "random"};
 
-        for (int l = 0; l < targetSupplier.size(); l++) {
-            System.out.println("Target: "+supplier[indexSupplier++]);
-            for (int j = 0; j < sorts.size(); j++) {
-                System.out.println("\tSearch: "+search[indexSearch++%3]);
-                for (int k = 0; k < arrays.size(); k++) {
-                    System.out.print("\t\tArray: "+arrays.get(k)+"\t: ");
+        for (int l=0;l<sequenceCreators.size();l++){
+            System.out.println("\n"+sequenceNames[l]);
+            for (int j=0;j<sorts.size();j++){
+                System.out.println("\t"+sortNames[j]);
+                for (int k=0;k<arraySizes.size();k++){
+                    System.out.print("\t\t"+arraySizeNames[k]+":");
                     long sum = 0;
-                    for (int i = 0; i < repeats; i++) {
-                        sum += times[i][j][k];
+                    for (int i=0;i<repeats;i++){
+                        sum += times[i][j][k][l];
                     }
-                    System.out.println(sum/repeats*Math.pow(10, -9));
+                    System.out.println("\t\t"+sum/repeats*Math.pow(10,-9));
                 }
             }
-        }*/
+        }
+
 
 
     }
 }
 /*
-Target: Random
-	Search: Linear
-		Array: 100000	: 2.6397E-5
-		Array: 1000000	: 7.23166E-4
-		Array: 100000000	: 0.028914579000000003
-		Array: 685154321	: 0.198568984
-	Search: Binary
-		Array: 100000	: 1.5300000000000002E-6
-		Array: 1000000	: 8.63E-6
-		Array: 100000000	: 7.528000000000001E-6
-		Array: 685154321	: 1.9303E-5
-	Search: BinaryNew
-		Array: 100000	: 1.063E-6
-		Array: 1000000	: 8.539E-6
-		Array: 100000000	: 9.181E-6
-		Array: 685154321	: 1.9203000000000002E-5
-Target: -10
-	Search: Linear
-		Array: 100000	: 2.6397E-5
-		Array: 1000000	: 7.23166E-4
-		Array: 100000000	: 0.028914579000000003
-		Array: 685154321	: 0.198568984
-	Search: Binary
-		Array: 100000	: 1.5300000000000002E-6
-		Array: 1000000	: 8.63E-6
-		Array: 100000000	: 7.528000000000001E-6
-		Array: 685154321	: 1.9303E-5
-	Search: BinaryNew
-		Array: 100000	: 1.063E-6
-		Array: 1000000	: 8.539E-6
-		Array: 100000000	: 9.181E-6
-		Array: 685154321	: 1.9203000000000002E-5
+increasing
+	quickSort
+		100:		1.596E-5
+		1000:		7.0098E-4
+		10000:		0.024483920000000003
+		100000:		2.4337660100000003
+		200000:		9.47106009
+	quickSortRandom
+		100:		2.8230000000000002E-5
+		1000:		1.2880000000000001E-4
+		10000:		7.4388E-4
+		100000:		0.00763035
+		200000:		0.01359305
+	quickSortNewRandom
+		100:		6.0060000000000004E-5
+		1000:		2.0853E-4
+		10000:		0.00134326
+		100000:		0.01296485
+		200000:		0.025967120000000003
+	quickSortTriRandom
+		100:		1.861E-5
+		1000:		9.864E-5
+		10000:		7.6866E-4
+		100000:		0.0074722700000000005
+		200000:		0.015399870000000001
+	quickSortTriNewRandom
+		100:		2.474E-5
+		1000:		1.4857000000000002E-4
+		10000:		0.0012626800000000002
+		100000:		0.01317747
+		200000:		0.025518950000000002
+
+decreasing
+	quickSort
+		100:		2.682E-5
+		1000:		5.854300000000001E-4
+		10000:		0.031237720000000004
+		100000:		3.0894138
+		200000:		11.90747026
+	quickSortRandom
+		100:		1.485E-5
+		1000:		1.0919E-4
+		10000:		7.427400000000001E-4
+		100000:		0.007357590000000001
+		200000:		0.014570930000000001
+	quickSortNewRandom
+		100:		2.519E-5
+		1000:		1.6662E-4
+		10000:		0.0017220500000000001
+		100000:		0.014154080000000001
+		200000:		0.02932993
+	quickSortTriRandom
+		100:		9.56E-6
+		1000:		8.699E-5
+		10000:		8.086E-4
+		100000:		0.00801658
+		200000:		0.01674331
+	quickSortTriNewRandom
+		100:		1.719E-5
+		1000:		1.4986E-4
+		10000:		0.0015688100000000001
+		100000:		0.01482989
+		200000:		0.02735032
+
+random
+	quickSort
+		100:		4.838E-5
+		1000:		9.969E-5
+		10000:		9.3627E-4
+		100000:		0.00904765
+		200000:		0.01803139
+	quickSortRandom
+		100:		1.357E-5
+		1000:		1.1502E-4
+		10000:		0.00140827
+		100000:		0.01244273
+		200000:		0.024784880000000002
+	quickSortNewRandom
+		100:		3.156E-5
+		1000:		1.8001E-4
+		10000:		0.00200056
+		100000:		0.01953904
+		200000:		0.040227120000000005
+	quickSortTriRandom
+		100:		1.1370000000000001E-5
+		1000:		1.0479E-4
+		10000:		0.0010945800000000002
+		100000:		0.01272811
+		200000:		0.02618699
+	quickSortTriNewRandom
+		100:		1.8220000000000002E-5
+		1000:		1.7014000000000002E-4
+		10000:		0.00185913
+		100000:		0.01899969
+		200000:		0.03836863
+
  */
