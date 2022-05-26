@@ -44,7 +44,7 @@ public class PriorityQueueMinHeap implements PriorityQueue<Integer> {
         a = new int[capacity];
         heapsize = 0;
         //warum hier nicht wirklich die Lnge also wüsste gerade auch nicht wie ich die ausrechnen sollte aber kann man die nicht ablesen?
-
+        // am Anfang null elemente
     }
 
 
@@ -52,9 +52,9 @@ public class PriorityQueueMinHeap implements PriorityQueue<Integer> {
         if(heapsize >= a.length){
             throw new IllegalArgumentException("The Queue is already full!");
         }
-        heapsize = heapsize + 1; //warum hast du das erst am Ende, aklso setzt du dann nicht bei dem momentanen Ende einfach einen neuen key ein?
         a[heapsize] = Integer.MAX_VALUE;
         decreaseKey(heapsize, elem);
+        heapsize++;
 
         
     }
@@ -69,7 +69,6 @@ public class PriorityQueueMinHeap implements PriorityQueue<Integer> {
         if (heapsize < 1){
             throw new IllegalArgumentException("There are no keys!");
         }
-        int min = a[0];
         a[0] = a[heapsize];
         heapsize--;
         minHeapify(0);
