@@ -404,6 +404,8 @@ public class SortTools {
         pivots[3] = new Random().nextInt(l,r+1);
         pivots[4] = new Random().nextInt(l,r+1);
 
+        Arrays.sort(pivots);
+
         int pivot1 = pivots[1];
         int pivot2 = pivots[3];
 
