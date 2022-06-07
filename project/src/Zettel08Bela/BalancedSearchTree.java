@@ -172,10 +172,10 @@ public class BalancedSearchTree<K extends Comparable<K>>  {
         return this.findMax(this.root).value;
     }
 
-    public K[] toSortedArray() {
-        List<K> list = new ArrayList<>();
+    public ArrayList<K> toSortedArray() {
+        ArrayList<K> list = new ArrayList<>();
         this.toSortedArray(this.root, list);
-        return (K[]) list.toArray();
+        return list;
     }
 
     private void toSortedArray(BSTNode<K> node, List<K> list) {
