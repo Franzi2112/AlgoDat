@@ -104,28 +104,46 @@ public class BalancedSearchTree<K extends Comparable<K>>  {
     }
 
     public void delete(K value) {
-        this.delete(this.root, value);
+        this.delete(null, this.root, value);
     }
 
-    private void delete(BSTNode<K> node, K value) {
+    private void delete(BSTNode<K> pNode, BSTNode<K> node, K value) {
         if (node == null) {
             return;
         }
+
+        if(pNode== null &&node.value==value) {
+            this.root=null;
+            return;
+        }
+
         if (value.compareTo(node.value) < 0) {
-            this.delete(node.left, value);
+            this.delete(node, node.left, value);
         } else if (value.compareTo(node.value) > 0) {
-            this.delete(node.right, value);
+            this.delete(node, node.right, value);
         } else {
             if (node.left == null && node.right == null) {
-                node = null;
+                if (pNode.left==node) {
+                    pNode.left=null;
+                } else {
+                    pNode.right=null;
+                }
             } else if (node.left == null) {
-                node = node.right;
+                if (pNode.left==node) {
+                    pNode.left=node.right;
+                } else {
+                    pNode.right=node.right;
+                }
             } else if (node.right == null) {
-                node = node.left;
+                if (pNode.left==node) {
+                    pNode.left=node.left;
+                } else {
+                    pNode.right=node.left;
+                }
             } else {
                 BSTNode<K> min = this.findMin(node.right);
                 node.value = min.value;
-                this.delete(node.right, min.value);
+                this.delete(node, node.right, min.value);
             }
         }
     }
