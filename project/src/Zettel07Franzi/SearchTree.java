@@ -69,8 +69,8 @@ public class SearchTree <K extends Comparable <K>> {
         }
     }
 
-    public TreeNode<K> min() {
-        return this.findMin(this.root);
+    public K min() {
+        return this.findMin(this.root).value;
     }
 
     public TreeNode<K> findMax(TreeNode<K> node) {
@@ -81,8 +81,8 @@ public class SearchTree <K extends Comparable <K>> {
         }
     }
 
-    public TreeNode<K> max() {
-        return this.findMax(this.root);
+    public K max() {
+        return this.findMax(this.root).value;
     }
 
     public void toSortedArray(TreeNode<K> node, List<K> list) {
