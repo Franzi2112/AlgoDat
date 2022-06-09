@@ -1,6 +1,8 @@
 package Zettel07Franzi;
 
 
+import Zettel08Bela.BSTNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,5 +109,6 @@ public class SearchTree <K extends Comparable <K>> {
         this.toSortedArray(this.root, list);
         return (K[]) list.toArray();
     }
+
 
 }
