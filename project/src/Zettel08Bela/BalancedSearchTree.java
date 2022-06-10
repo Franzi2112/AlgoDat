@@ -30,14 +30,24 @@ public class BalancedSearchTree<K extends Comparable<K>>  {
         BSTNode<K> y = node.right;
         node.right = y.left;
         y.left = node;
-        node = y;
+        if (node.parent.left== node) {
+            node.parent.left = y;
+        }
+        else {
+            node.parent.right = y;
+        }
     }
 
     private void RightRotate(BSTNode<K> node) {
         BSTNode<K> y = node.left;
         node.left = y.right;
         y.right = node;
-        node = y;
+        if (node.parent.left== node) {
+            node.parent.left = y;
+        }
+        else {
+            node.parent.right = y;
+        }
     }
 
     private void DLeftRotate(BSTNode<K> node) {
@@ -96,57 +106,58 @@ public class BalancedSearchTree<K extends Comparable<K>>  {
         }
         if (value.compareTo(node.value) < 0) {
             node.left = this.insert(node.left, value);
+            node.left.parent = node;
         } else if (value.compareTo(node.value) > 0) {
             node.right = this.insert(node.right, value);
+            node.right.parent = node;
         }
         rebalance(node);
         return node;
     }
 
     public void delete(K value) {
-        this.delete(null, this.root, value);
+        this.delete(this.root, value);
     }
 
-    private void delete(BSTNode<K> pNode, BSTNode<K> node, K value) {
+    private void delete(BSTNode<K> node, K value) {
         if (node == null) {
             return;
         }
-
-        if(pNode== null &&node.value==value) {
-            this.root=null;
-            return;
-        }
-
         if (value.compareTo(node.value) < 0) {
-            this.delete(node, node.left, value);
+            this.delete(node.left, value);
         } else if (value.compareTo(node.value) > 0) {
-            this.delete(node, node.right, value);
+            this.delete(node.right, value);
         } else {
             if (node.left == null && node.right == null) {
-                if (pNode.left==node) {
-                    pNode.left=null;
+                if (node.parent.left == node) {
+                    node.parent.left = null;
                 } else {
-                    pNode.right=null;
+                    node.parent.right = null;
                 }
             } else if (node.left == null) {
-                if (pNode.left==node) {
-                    pNode.left=node.right;
+                if (node.parent.left == node) {
+                    node.parent.left = node.right;
+                    node.right.parent = node.parent;
                 } else {
-                    pNode.right=node.right;
+                    node.parent.right = node.right;
+                    node.right.parent = node.parent;
                 }
             } else if (node.right == null) {
-                if (pNode.left==node) {
-                    pNode.left=node.left;
+                if (node.parent.left == node) {
+                    node.parent.left = node.left;
+                    node.left.parent = node.parent;
                 } else {
-                    pNode.right=node.left;
+                    node.parent.right = node.left;
+                    node.left.parent = node.parent;
                 }
             } else {
-                BSTNode<K> min = this.findMin(node.right);
-                node.value = min.value;
-                this.delete(node, node.right, min.value);
+                BSTNode<K> successor = findMin(node.right);
+                node.value = successor.value;
+                this.delete(node.right, successor.value);
             }
         }
     }
+
 
     public BSTNode<K> findMin(BSTNode<K> node) {
         if (node.left == null) {
