@@ -106,7 +106,7 @@ public class SearchTools {
 
     public static void main(String[] args) {
         int repeats= 500;
-        List<BiFunction<int[], Integer, Integer>> searches = List.of(SearchTools::linSearch, SearchTools::binSearch, SearchTools::binSearchNew);
+        List<BiFunction<int[], Integer, Integer>> searches = List.of( SearchTools::linSearch,SearchTools::binSearch, SearchTools::binSearchNew);
         List<Integer> arrays= List.of(100000,1000000,100000000,685154321);
         List<Function<Integer,Integer>> targetSupplier = List.of(x->new Random().nextInt(x)+1,x->-10);
         long[][][] times = new long[repeats][searches.size()][arrays.size()];
