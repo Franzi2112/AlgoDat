@@ -15,8 +15,8 @@ public class HashmapForStrings {
         this.size=m;
         this.hashtable= new ArrayList[m];
 
-        for(List slot:this.hashtable) {
-            slot= new ArrayList();
+        for(int i=0; i<m;i++) {
+            this.hashtable[i]= new ArrayList();
         }
     }
 
@@ -24,8 +24,8 @@ public class HashmapForStrings {
         byte[] bytes= string.getBytes();
         int sum=0;
         int counter=0;
-        for (byte Byte:bytes) {
-            sum+= ((int) Byte)*counter++;
+        for (byte bite:bytes) {
+            sum+= Byte.toUnsignedInt(bite)*counter++;
         }
         return sum%this.size;
     }
@@ -50,8 +50,8 @@ public class HashmapForStrings {
 
         for (int size: sizes) {
             HashmapForStrings map = new HashmapForStrings(1000);
-            FileReader scrabble = new FileReader("OfficialScrabbleWordListGerman.txt");
-            FileReader friends = new FileReader("AreMyFriendsCheating.txt");
+            FileReader scrabble = new FileReader("project/src/Zettel09Bela/OfficialScrabbleWordListGerman.txt");
+            FileReader friends = new FileReader("project/src/Zettel09Bela/AreMyFriendsCheating.txt");
 
             System.out.println("Tablesize: "+size);
 
@@ -67,21 +67,22 @@ public class HashmapForStrings {
             reader = new BufferedReader(friends);
             int counter=0;
             currentTime= System.nanoTime();
-            reader.lines().forEach();
+            reader.lines().forEach((String s)->containsCheck.accept(s,map));
             time = System.nanoTime()-currentTime;
             System.out.println("\tSearch Time: "+time*Math.pow(10,-9));
+            System.out.println("\tWords in Map: "+containsCheck.count);
 
         }
     }
 
-    class ContainsCheck implements BiConsumer<String, HashmapForStrings>, Zettel09Bela.containscheck {
-        int count=0;
-        @Override
-        public void accept(String s,HashmapForStrings map) {
-            if (map.search(s)){
-                count++;
-            }
+
+}
+class ContainsCheck implements BiConsumer<String, HashmapForStrings>{
+    int count=0;
+    @Override
+    public void accept(String s,HashmapForStrings map) {
+        if (map.search(s)){
+            count++;
         }
     }
-
 }
