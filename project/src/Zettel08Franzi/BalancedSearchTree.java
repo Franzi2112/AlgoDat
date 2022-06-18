@@ -25,7 +25,7 @@ public class BalancedSearchTree <K extends Comparable <K>>{
     }
 
     private double rootBalance(BalancedSearchTreeNode<K> node){
-        return((numberOfNodes(node.left)+1)/(numberOfNodes(node.right)+1));
+        return (numberOfNodes(node.left)+1)/(numberOfNodes(node.right)+1);
     }
 
     private void RightRotate(BalancedSearchTreeNode<K> node) {
