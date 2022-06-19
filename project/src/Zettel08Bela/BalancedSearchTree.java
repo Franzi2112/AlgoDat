@@ -197,6 +197,4 @@ public class BalancedSearchTree<K extends Comparable<K>>  {
         list.add(node.value);
         this.toSortedArray(node.right, list);
     }
-
-
 }

@@ -1,25 +1,22 @@
-package Zettel09Bela;
+package Zettel10Bela;
+
+import Zettel09Bela.HashmapForStrings;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.BiConsumer;
 
-public class HashmapForStrings {
-    int size;//eigentlich m
-    List<String>[] hashtable;
+public class OpenHashmapForStrings {
+    int size; //=m
+    Object[] hashtable;
+    int selectedHashFunction;
 
-    public HashmapForStrings(int m) {
-        this.size=m;
-        this.hashtable= new ArrayList[m];
-
-        for(int i=0; i<m;i++) {
-            this.hashtable[i]= new ArrayList();
-        }
+    public OpenHashmapForStrings(int m) {
+        this.size = m;
+        this.hashtable = new String[m];
     }
 
-    public int hash(String string) {
+    public int hashHelp(String string) {
         byte[] bytes= string.getBytes();
         int sum=0;
         int counter=0;
@@ -27,6 +24,28 @@ public class HashmapForStrings {
             sum+= Byte.toUnsignedInt(bite)*counter++;
         }
         return sum%this.size;
+    }
+
+    public int linearHash(String string, int i) {
+        return (hashHelp(string)+i)%this.size;
+    }
+
+    public int quadraticHash(String string, int i) {
+        return (hashHelp(string)+i/2+i*i/2)%this.size;
+    }
+
+    private int hash2(String string) {
+        byte[] bytes= string.getBytes();
+        int sum=0;
+        int counter=0;
+        for (byte bite:bytes) {
+            sum+= Byte.toUnsignedInt(bite)*counter++;
+        }
+        return 1+(sum%(this.size-1));
+    }
+
+    public int doubleHash(String string, int i) {
+        return (hashHelp(string)+i*hash2(string))%this.size;
     }
 
     public void insert(String string) {
@@ -45,7 +64,7 @@ public class HashmapForStrings {
     }
 
     public static void main(String[] args) throws Exception{
-        int[] sizes = {1000,10000};
+        int[] sizes = {200000,1000000};
 
         for (int size: sizes) {
             HashmapForStrings map = new HashmapForStrings(1000);
@@ -76,7 +95,11 @@ public class HashmapForStrings {
 
 
 }
-class ContainsCheck implements BiConsumer<String, HashmapForStrings>{
+
+class Deleted {}
+
+
+class ContainsCheck implements BiConsumer<String, HashmapForStrings> {
     int count=0;
     @Override
     public void accept(String s,HashmapForStrings map) {
