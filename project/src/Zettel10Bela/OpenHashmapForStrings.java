@@ -107,8 +107,8 @@ public class OpenHashmapForStrings {
             for (int size: sizes) {
 
                 OpenHashmapForStrings map = new OpenHashmapForStrings(size,mode);
-                FileReader scrabble = new FileReader("project/src/Zettel09Bela/OfficialScrabbleWordListGerman.txt");
-                FileReader friends = new FileReader("project/src/Zettel09Bela/AreMyFriendsCheating.txt");
+                FileReader scrabble = new FileReader("src/OfficialScrabbleWordListGerman.txt");
+                FileReader friends = new FileReader("src/AreMyFriendsCheating.txt");
 
                 System.out.println("Tablesize: "+size);
 

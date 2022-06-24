@@ -48,9 +48,9 @@ public class HashmapForStrings {
         int[] sizes = {1000,10000};
 
         for (int size: sizes) {
-            HashmapForStrings map = new HashmapForStrings(1000);
-            FileReader scrabble = new FileReader("project/src/Zettel09Bela/OfficialScrabbleWordListGerman.txt");
-            FileReader friends = new FileReader("project/src/Zettel09Bela/AreMyFriendsCheating.txt");
+            HashmapForStrings map = new HashmapForStrings(size);
+            FileReader scrabble = new FileReader("OfficialScrabbleWordListGerman.txt");
+            FileReader friends = new FileReader("AreMyFriendsCheating.txt");
 
             System.out.println("Tablesize: "+size);
 
