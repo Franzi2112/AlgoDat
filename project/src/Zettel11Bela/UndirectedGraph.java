@@ -1,6 +1,5 @@
 package Zettel11Bela;
 
-import com.sun.tools.javac.Main;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -36,9 +35,6 @@ public class UndirectedGraph {
     }
 
     public void addEdge(Integer i, Integer j) {
-        if(!(nodes.contains(i)&&nodes.contains(j))){
-            return;
-        }
         if (!AL.containsKey(i)){
             AL.put(i,new ArrayList<>());
             AL.get(i).add(j);
@@ -58,6 +54,38 @@ public class UndirectedGraph {
         AL.get(j).remove(i);
     }
 
+    public static UndirectedGraph[] export() throws Exception {
+        BufferedReader zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
+        BufferedReader twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
+
+        FindMax findMaxZachary = new FindMax();
+        FindMax findMaxTwitter = new FindMax();
+
+        zachary.lines().forEach(findMaxZachary);
+        twitter.lines().forEach(findMaxTwitter);
+
+
+        UndirectedGraph zacharyG = new UndirectedGraph(findMaxZachary.max);
+        UndirectedGraph twitterG = new UndirectedGraph(findMaxTwitter.max);
+
+        zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
+        twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
+
+
+        while (zachary.ready()){
+            String[] s2= zachary.readLine().split(" ");
+            int[] i2={Integer.parseInt(s2[0]), Integer.parseInt(s2[1])};
+            zacharyG.addEdge(i2[0],i2[1]);
+        }
+
+        while (twitter.ready()){
+            String[] s2= twitter.readLine().split(" ");
+            int[] i2={Integer.parseInt(s2[0]), Integer.parseInt(s2[1])};
+            twitterG.addEdge(i2[0],i2[1]);
+        }
+        return new UndirectedGraph[]{zacharyG/*,twitterG*/};
+    }
+
 
     public static void main(String[] args) throws Exception {
         BufferedReader zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
@@ -73,16 +101,21 @@ public class UndirectedGraph {
         UndirectedGraph zacharyG = new UndirectedGraph(findMaxZachary.max);
         UndirectedGraph twitterG = new UndirectedGraph(findMaxTwitter.max);
 
-        zachary.lines().forEach(string ->{
-            String[] s2= string.split(" ");
+        zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
+        twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
+
+
+        while (zachary.ready()){
+            String[] s2= zachary.readLine().split(" ");
             int[] i2={Integer.parseInt(s2[0]), Integer.parseInt(s2[1])};
             zacharyG.addEdge(i2[0],i2[1]);
-        });
-        twitter.lines().forEach(string ->{
-            String[] s2= string.split(" ");
+        }
+
+        while (twitter.ready()){
+            String[] s2= twitter.readLine().split(" ");
             int[] i2={Integer.parseInt(s2[0]), Integer.parseInt(s2[1])};
             twitterG.addEdge(i2[0],i2[1]);
-        });
+        }
     }
 }
 
