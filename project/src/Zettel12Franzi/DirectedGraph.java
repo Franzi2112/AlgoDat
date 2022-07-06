@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
@@ -48,7 +49,7 @@ public class DirectedGraph {
     }
 
     public void fileToGraph(String filename) throws IOException {
-        Stream<String> lines = Files.lines(Path.of(filename)).map(x -> x.split(" ")).for
+        Stream<String> lines = Files.lines(Path.of(filename)).map(x -> (x.split(" ").
 
             }
         }
