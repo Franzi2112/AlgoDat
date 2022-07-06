@@ -1,8 +1,13 @@
 package Zettel12Franzi;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class DirectedGraph {
     List<Integer> Nodes;
@@ -42,7 +47,12 @@ public class DirectedGraph {
         AL.get(i).remove(j);
     }
 
-  //gibt keine Datein in dem Ordner lol
+    public void fileToGraph(String filename) throws IOException {
+        Stream<String> lines = Files.lines(Path.of(filename)).map(x -> x.split(" ")).for
+
+            }
+        }
+    }
 
 
 }
