@@ -62,8 +62,6 @@ public class DirectedGraph {
         return new DirectedGraph[]{Graph};
     }
 
-    public LinkedList<Integer> topSort(DirectedGraph)
-
 
     public static void main(String[] args) throws Exception {
         DirectedGraph[] outbnet = fileToGraph("project/src/Zettel12Franzi/outbnet.sec");
