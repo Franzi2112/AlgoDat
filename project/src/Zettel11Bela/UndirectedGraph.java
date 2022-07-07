@@ -2,7 +2,6 @@ package Zettel11Bela;
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,8 +54,8 @@ public class UndirectedGraph {
     }
 
     public static UndirectedGraph[] export() throws Exception {
-        BufferedReader zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
-        BufferedReader twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
+        BufferedReader zachary = new BufferedReader(new FileReader("src/out.ucidata-zachary.sec"));
+        BufferedReader twitter = new BufferedReader(new FileReader("src/soc-twitter-follows.txt"));
 
         FindMax findMaxZachary = new FindMax();
         FindMax findMaxTwitter = new FindMax();
@@ -68,8 +67,8 @@ public class UndirectedGraph {
         UndirectedGraph zacharyG = new UndirectedGraph(findMaxZachary.max);
         UndirectedGraph twitterG = new UndirectedGraph(findMaxTwitter.max);
 
-        zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
-        twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
+        zachary = new BufferedReader(new FileReader("src/out.ucidata-zachary.sec"));
+        twitter = new BufferedReader(new FileReader("src/soc-twitter-follows.txt"));
 
 
         while (zachary.ready()){
@@ -87,36 +86,7 @@ public class UndirectedGraph {
     }
 
 
-    public static void main(String[] args) throws Exception {
-        BufferedReader zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
-        BufferedReader twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
 
-        FindMax findMaxZachary = new FindMax();
-        FindMax findMaxTwitter = new FindMax();
-
-        zachary.lines().forEach(findMaxZachary);
-        twitter.lines().forEach(findMaxTwitter);
-
-
-        UndirectedGraph zacharyG = new UndirectedGraph(findMaxZachary.max);
-        UndirectedGraph twitterG = new UndirectedGraph(findMaxTwitter.max);
-
-        zachary = new BufferedReader(new FileReader("project/src/Zettel11Bela/out.ucidata-zachary.sec"));
-        twitter = new BufferedReader(new FileReader("project/src/Zettel11Bela/soc-twitter-follows.txt"));
-
-
-        while (zachary.ready()){
-            String[] s2= zachary.readLine().split(" ");
-            int[] i2={Integer.parseInt(s2[0]), Integer.parseInt(s2[1])};
-            zacharyG.addEdge(i2[0],i2[1]);
-        }
-
-        while (twitter.ready()){
-            String[] s2= twitter.readLine().split(" ");
-            int[] i2={Integer.parseInt(s2[0]), Integer.parseInt(s2[1])};
-            twitterG.addEdge(i2[0],i2[1]);
-        }
-    }
 }
 
 class FindMax implements Consumer<String>{
