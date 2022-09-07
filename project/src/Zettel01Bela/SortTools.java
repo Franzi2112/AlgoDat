@@ -68,7 +68,7 @@ public class SortTools {
     public static void main(String[] args) {
         int testSize = 10;
         long[] times=new long[testSize*5];
-        int[][] testData = { createSequenceDec(100), createSequenceDec(1000),createSequenceDec(10000), createSequenceDec(100000), createSequenceDec(200000)};
+        int[][] testData = { createSequenceDec(100)};
 
         for (int j = 0; j < testSize; j++) {
             for (int i = 0; i < testData.length; i++) {
@@ -83,11 +83,14 @@ public class SortTools {
             System.out.print("Test "+i+": ");
             double avg=0;
             for (int j = 0; j < testSize; j++) {
-                System.out.printf("%5f ",times[i*testSize+j]*Math.pow(10,-9));
-                avg+=times[i*testSize+j]*Math.pow(10,-9);
+                double avg1 = times[i * testSize + j] * Math.pow(10, -9);
+                System.out.printf("%5f ", avg1);
+                avg+= avg1;
             }
             System.out.println();
             System.out.printf("\tAverage: %5f\n",avg/testSize);
+            String test= null;
+            System.out.println(test.charAt(0));
         }
     }
 }
